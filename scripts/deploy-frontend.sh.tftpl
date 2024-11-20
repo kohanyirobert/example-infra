@@ -1,0 +1,16 @@
+#!/bin/bash
+image=ghcr.io/kohanyirobert/example-frontend:latest
+docker pull $image
+docker run \
+  --name frontend \
+  --publish 80:7000 \
+  --env VITE_PROXY=http://${backend_lb_dns_name} \
+  --rm \
+  --detach \
+  $image
+
+until curl --fail http://localhost
+do
+  echo "Waiting for the frontend, retrying in 3 seconds..."
+  sleep 3
+done

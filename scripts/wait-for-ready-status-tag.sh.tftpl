@@ -1,0 +1,20 @@
+#!/bin/bash
+tag_key=Status
+required_tag_value=Ready
+while true
+do
+  tag_value=$(aws ec2 describe-tags \
+    --filters "Name=resource-id,Values=${instance_id}" "Name=key,Values=$tag_key" \
+    --query "Tags[0].Value" \
+    --output text)
+  if [ "$tag_value" == "$required_tag_value" ]
+  then
+    echo "$tag_key tag is $required_tag_value"
+    break
+  else
+    echo "Waiting for $tag_key tag to be $required_tag_value"
+    sleep 3
+  fi
+done
+
+aws ec2 delete-tags --resources ${instance_id} --tag "Key=$tag_key"
