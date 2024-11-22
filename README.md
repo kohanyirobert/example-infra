@@ -10,11 +10,18 @@ This repository is set up to deploy a multi-tier application (web => api => db) 
 
 ## Requirements
 
-- Locally installed Terraform, AWS and GitHub CLI tools
+- Locally installed Terraform, AWS, GitHub and [Graphviz](https://graphviz.org/) CLI tools
 - Access to an AWS account
 - Hosted zone/domain registered in AWS Route 53
 - Configuration in place
 - Forking *this* GitHub repository to get admin access for GitHub Actions
+
+Note: Graphviz is optional, but generating it's a nice addition to `terraform graph`, e.g.
+
+```
+terraform graph | dot -Tsvg -o infra.svg
+start infra.svg
+```
 
 ## Usage
 
