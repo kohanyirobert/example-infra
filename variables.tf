@@ -29,6 +29,11 @@ variable "project" {
   default     = "main"
 }
 
+variable "github_oidc_subject" {
+  description = "Subject to be trusted by IAM, e.g. 'yourgithubname/yourreponname'"
+  type        = string
+}
+
 variable "db_password" {
   description = "Database password to be provisioned as an SSM parameter"
   sensitive   = true
