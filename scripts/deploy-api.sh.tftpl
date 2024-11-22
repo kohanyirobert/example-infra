@@ -1,10 +1,12 @@
 #!/bin/bash
+hostname=$(hostname)
 db_password=$(aws ssm get-parameter --output text --query Parameter.Value --name db_password)
 image=${api_image_tag}
 docker pull $image
 docker run \
   --name api \
   --publish 80:5000 \
+  --env EC2_HOSTNAME=$hostname \
   --env PG_URL=postgres://api:$db_password@${db_private_ip}:5432/cars \
   --rm \
   --detach \
