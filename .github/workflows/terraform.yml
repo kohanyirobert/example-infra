@@ -14,15 +14,19 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup specific Terraform CLI version
+        uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.9.8"
-      - uses: devsectop/tf-via-pr@v12
+
+      - name: Run terraform plan/apply
+        uses: devsectop/tf-via-pr@v12
         with:
           format: true
           validate: true
           command: ${{ github.event_name == 'push' && 'apply' || 'plan' }}
           arg-lock: ${{ github.event_name == 'push' }}
-          arg-backend: dynamodb_table=${{ secrets.TF_BACKEND_DYNAMO_TABLE }},region=${{ secrets.TF_BACKEND_REGION }},bucket=${{ secrets.TF_BACKEND_BUCKET }},key=${{ secrets.TF_BACKEND_KEY }}
           plan-encrypt: ${{ secrets.PASSPHRASE }}
