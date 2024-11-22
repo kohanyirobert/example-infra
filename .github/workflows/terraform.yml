@@ -1,0 +1,26 @@
+name: Terraform plan and apply
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      checks: write
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+      - uses: devsectop/tf-via-pr@v12
+        with:
+          format: true
+          validate: true
+          command: ${{ github.event_name == 'push' && 'apply' || 'plan' }}
+          arg-lock: ${{ github.event_name == 'push' }}
+          arg-backend: dynamodb_table=${{ secrets.TF_BACKEND_DYNAMO_TABLE }},region=${{ secrets.TF_BACKEND_REGION }},bucket=${{ secrets.TF_BACKEND_BUCKET }},key=${{ secrets.TF_BACKEND_KEY }},
+          plan-encrypt: ${{ secrets.PASSPHRASE }}
