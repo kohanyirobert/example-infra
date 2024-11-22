@@ -18,6 +18,12 @@ resource "aws_instance" "db" {
   }
 
   depends_on = [aws_ssm_parameter.db_password]
+
+  lifecycle {
+    ignore_changes = [
+      tags["Status"]
+     ]
+  }
 }
 
 resource "terraform_data" "wait_for_db" {
