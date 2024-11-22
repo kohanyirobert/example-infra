@@ -76,7 +76,8 @@ Note: when the `api` or `web` images deployed to the infra change related Terraf
 
 ## TODO
 
-- It seems that the `db` insteance gets recreated a lot when it doesn't need to because there are some weird dependencies somewhere...
+- ~~It seems that the `db` insteance gets recreated a lot when it doesn't need to because there are some weird dependencies somewhere...~~
+  - The problem is the `Status`, it should be removed by a `local-exec` provisioner, but it may not run on GitHub Actions or at all
 - Move variables all into `github-actions-secrets.env` for ease of use
 - Make `AWS_ROLE_TO_ASSUME` not a secret or parameterize role name in `.tf` config
 - Set `TF_BACKEND_*` variables with GitHub CLI as well
