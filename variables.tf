@@ -1,16 +1,26 @@
 variable "tld" {
-  type        = string
   description = "TLD name, e.g. 'com' (without a . at the end)"
+  type        = string
 }
 
 variable "domain" {
-  type        = string
   description = "Domain name, e.g. 'example' (without a . at the end), to be appended to TLD"
+  type        = string
 }
 
 variable "subdomain" {
-  type        = string
   description = "Subdomain name, e.g. 'other' (without a . at the end), to be appended to domain and TLD"
+  type        = string
+}
+
+variable "web_image_tag" {
+  description = "Web container image tag"
+  type        = string
+}
+
+variable "api_image_tag" {
+  description = "API container image tag"
+  type        = string
 }
 
 variable "region" {

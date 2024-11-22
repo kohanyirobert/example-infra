@@ -36,6 +36,7 @@ data "cloudinit_config" "api" {
     content_type = "text/x-shellscript"
     content = templatefile("./scripts/deploy-api.sh.tftpl", {
       db_private_ip = aws_instance.db.private_ip
+      api_image_tag = var.api_image_tag
     })
   }
 }
@@ -55,6 +56,7 @@ data "cloudinit_config" "web" {
     content_type = "text/x-shellscript"
     content = templatefile("./scripts/deploy-web.sh.tftpl", {
       api_lb_dns_name = aws_lb.api.dns_name
+      web_image_tag = var.web_image_tag
     })
   }
 }

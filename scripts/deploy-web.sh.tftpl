@@ -1,5 +1,5 @@
 #!/bin/bash
-image=ghcr.io/kohanyirobert/example-web:0.0.1
+image=${web_image_tag}
 docker pull $image
 docker run \
   --name web \
