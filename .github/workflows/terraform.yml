@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  provision:
+  terraform-plan-apply:
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -29,4 +29,5 @@ jobs:
           validate: true
           command: ${{ github.event_name == 'push' && 'apply' || 'plan' }}
           arg-lock: ${{ github.event_name == 'push' }}
+          arg-backend-config: dynamodb_table=${{ secrets.TF_BACKEND_DYNAMO_TABLE }},region=${{ secrets.TF_BACKEND_REGION }},bucket=${{ secrets.TF_BACKEND_BUCKET }},key=${{ secrets.TF_BACKEND_KEY }}
           plan-encrypt: ${{ secrets.PASSPHRASE }}
