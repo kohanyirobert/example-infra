@@ -21,7 +21,7 @@ data "cloudinit_config" "db" {
   }
 }
 
-data "cloudinit_config" "backend" {
+data "cloudinit_config" "api" {
   gzip          = false
   base64_encode = false
 
@@ -32,9 +32,9 @@ data "cloudinit_config" "backend" {
   }
 
   part {
-    filename     = "01-deploy-backend.sh"
+    filename     = "01-deploy-api.sh"
     content_type = "text/x-shellscript"
-    content = templatefile("./scripts/deploy-backend.sh.tftpl", {
+    content = templatefile("./scripts/deploy-api.sh.tftpl", {
       db_private_ip = aws_instance.db.private_ip
     })
   }
@@ -54,7 +54,7 @@ data "cloudinit_config" "frontend" {
     filename     = "01-deploy-frontend.sh"
     content_type = "text/x-shellscript"
     content = templatefile("./scripts/deploy-frontend.sh.tftpl", {
-      backend_lb_dns_name = aws_lb.backend.dns_name
+      api_lb_dns_name = aws_lb.api.dns_name
     })
   }
 }

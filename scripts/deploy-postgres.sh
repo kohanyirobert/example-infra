@@ -25,14 +25,14 @@ docker run \
   --name db \
   --publish 5432:5432 \
   --mount type=bind,source=$tmpdir,target=/docker-entrypoint-initdb.d,readonly \
-  --env POSTGRES_USER=backend \
+  --env POSTGRES_USER=api \
   --env POSTGRES_DB=cars \
   --env POSTGRES_PASSWORD=$db_password \
   --rm \
   --detach \
   $image
 
-until docker exec db psql -U backend -d cars -c 'select * from car'
+until docker exec db psql -U api -d cars -c 'select * from car'
 do
   echo "Waiting for the db, retrying in 53 seconds..."
   sleep 3

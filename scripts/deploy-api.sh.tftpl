@@ -1,17 +1,17 @@
 #!/bin/bash
 db_password=$(aws ssm get-parameter --output text --query Parameter.Value --name db_password)
-image=ghcr.io/kohanyirobert/example-backend:latest
+image=ghcr.io/kohanyirobert/example-api:latest
 docker pull $image
 docker run \
-  --name backend \
+  --name api \
   --publish 80:5000 \
-  --env PG_URL=postgres://backend:$db_password@${db_private_ip}:5432/cars \
+  --env PG_URL=postgres://api:$db_password@${db_private_ip}:5432/cars \
   --rm \
   --detach \
   $image
 
 until curl --fail http://localhost/api/cars
 do
-  echo "Waiting for the backend, retrying in 3 seconds..."
+  echo "Waiting for the api, retrying in 3 seconds..."
   sleep 3
 done

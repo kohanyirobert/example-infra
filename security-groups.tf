@@ -48,8 +48,8 @@ resource "aws_security_group" "frontend" {
   }
 }
 
-resource "aws_security_group" "backend_lb" {
-  name   = "backend-lb"
+resource "aws_security_group" "api_lb" {
+  name   = "api-lb"
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -70,12 +70,12 @@ resource "aws_security_group" "backend_lb" {
 
   tags = {
     Project     = var.project
-    Description = "Allows accessing backend load balancer from frontend only"
+    Description = "Allows accessing api load balancer from frontend only"
   }
 }
 
-resource "aws_security_group" "backend" {
-  name   = "backend"
+resource "aws_security_group" "api" {
+  name   = "api"
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -83,7 +83,7 @@ resource "aws_security_group" "backend" {
     to_port   = 80
     protocol  = "tcp"
     security_groups = [
-      aws_security_group.backend_lb.id,
+      aws_security_group.api_lb.id,
     ]
   }
 
@@ -96,7 +96,7 @@ resource "aws_security_group" "backend" {
 
   tags = {
     Project     = var.project
-    Description = "Allows accessing backend from backend load balancer only"
+    Description = "Allows accessing api from api load balancer only"
   }
 }
 
@@ -109,7 +109,7 @@ resource "aws_security_group" "db" {
     to_port   = 5432
     protocol  = "tcp"
     security_groups = [
-      aws_security_group.backend.id,
+      aws_security_group.api.id,
     ]
   }
 
@@ -122,6 +122,6 @@ resource "aws_security_group" "db" {
 
   tags = {
     Project     = var.project
-    Description = "Allows accessing db from backend only"
+    Description = "Allows accessing db from api only"
   }
 }

@@ -85,50 +85,50 @@ variable "frontend_listener_port" {
   default     = 80
 }
 
-variable "backend_min_count" {
-  description = "Minimum number of instances in backend ASG"
+variable "api_min_count" {
+  description = "Minimum number of instances in api ASG"
   type        = number
   default     = 0
   validation {
-    condition     = var.backend_min_count <= 0
-    error_message = "Must be greater than equal to zero and less than or equal to 'backend_desired_count'"
+    condition     = var.api_min_count <= 0
+    error_message = "Must be greater than equal to zero and less than or equal to 'api_desired_count'"
   }
 }
 
-variable "backend_desired_count" {
-  description = "Desired number of instances in backend ASG"
+variable "api_desired_count" {
+  description = "Desired number of instances in api ASG"
   type        = number
   default     = 1
   validation {
-    condition     = var.backend_min_count <= var.backend_desired_count
-    error_message = "Must be greater than or equal to 'backend_min_count' and less than or equal to 'var.backend_max_count'"
+    condition     = var.api_min_count <= var.api_desired_count
+    error_message = "Must be greater than or equal to 'api_min_count' and less than or equal to 'var.api_max_count'"
   }
 }
 
-variable "backend_max_count" {
-  description = "Maximum number of instances in backend ASG"
+variable "api_max_count" {
+  description = "Maximum number of instances in api ASG"
   type        = number
   default     = 3
   validation {
-    condition     = var.backend_desired_count <= var.backend_max_count
-    error_message = "Must be greater than or equal to 'var.backend_desired_count'"
+    condition     = var.api_desired_count <= var.api_max_count
+    error_message = "Must be greater than or equal to 'var.api_desired_count'"
   }
 }
 
-variable "backend_target_group_port" {
-  description = "Default port for backend LB target group (traffic and health checks too)"
+variable "api_target_group_port" {
+  description = "Default port for api LB target group (traffic and health checks too)"
   type        = number
   default     = 80
 }
 
-variable "backend_target_group_health_check_path" {
-  description = "Default path for backend LB target group health checks too"
+variable "api_target_group_health_check_path" {
+  description = "Default path for api LB target group health checks too"
   type        = string
   default     = "/api/cars"
 }
 
-variable "backend_listener_port" {
-  description = "Default port for backend LB traffic"
+variable "api_listener_port" {
+  description = "Default port for api LB traffic"
   type        = number
   default     = 80
 }
