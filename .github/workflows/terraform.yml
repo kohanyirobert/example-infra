@@ -2,8 +2,14 @@ name: Terraform plan and apply
 
 on:
   pull_request:
+    paths-ignore:
+      - README.md
+      - .editorconfig
   push:
     branches: [main]
+    paths-ignore:
+      - README.md
+      - .editorconfig
 
 jobs:
   terraform-plan-apply:
