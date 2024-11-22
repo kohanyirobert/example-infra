@@ -1,8 +1,8 @@
 #!/bin/bash
-image=ghcr.io/kohanyirobert/example-frontend:latest
+image=ghcr.io/kohanyirobert/example-web:latest
 docker pull $image
 docker run \
-  --name frontend \
+  --name web \
   --publish 80:7000 \
   --env VITE_PROXY=http://${api_lb_dns_name} \
   --rm \
@@ -11,6 +11,6 @@ docker run \
 
 until curl --fail http://localhost
 do
-  echo "Waiting for the frontend, retrying in 3 seconds..."
+  echo "Waiting for the web, retrying in 3 seconds..."
   sleep 3
 done

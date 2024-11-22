@@ -40,7 +40,7 @@ data "cloudinit_config" "api" {
   }
 }
 
-data "cloudinit_config" "frontend" {
+data "cloudinit_config" "web" {
   gzip          = false
   base64_encode = false
 
@@ -51,9 +51,9 @@ data "cloudinit_config" "frontend" {
   }
 
   part {
-    filename     = "01-deploy-frontend.sh"
+    filename     = "01-deploy-web.sh"
     content_type = "text/x-shellscript"
-    content = templatefile("./scripts/deploy-frontend.sh.tftpl", {
+    content = templatefile("./scripts/deploy-web.sh.tftpl", {
       api_lb_dns_name = aws_lb.api.dns_name
     })
   }

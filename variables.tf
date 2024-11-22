@@ -37,50 +37,50 @@ variable "local_bash_executable_path" {
   default     = "/bin/bash"
 }
 
-variable "frontend_min_count" {
-  description = "Minimum number of instances in frontend ASG"
+variable "web_min_count" {
+  description = "Minimum number of instances in web ASG"
   type        = number
   default     = 0
   validation {
-    condition     = var.frontend_min_count <= 0
-    error_message = "Must be greater than equal to zero and less than or equal to 'frontend_desired_count'"
+    condition     = var.web_min_count <= 0
+    error_message = "Must be greater than equal to zero and less than or equal to 'web_desired_count'"
   }
 }
 
-variable "frontend_desired_count" {
-  description = "Desired number of instances in frontend ASG"
+variable "web_desired_count" {
+  description = "Desired number of instances in web ASG"
   type        = number
   default     = 1
   validation {
-    condition     = var.frontend_min_count <= var.frontend_desired_count
-    error_message = "Must be greater than or equal to 'frontend_min_count' and less than or equal to 'var.frontend_max_count'"
+    condition     = var.web_min_count <= var.web_desired_count
+    error_message = "Must be greater than or equal to 'web_min_count' and less than or equal to 'var.web_max_count'"
   }
 }
 
-variable "frontend_max_count" {
-  description = "Maximum number of instances in frontend ASG"
+variable "web_max_count" {
+  description = "Maximum number of instances in web ASG"
   type        = number
   default     = 3
   validation {
-    condition     = var.frontend_desired_count <= var.frontend_max_count
-    error_message = "Must be greater than or equal to 'var.frontend_desired_count'"
+    condition     = var.web_desired_count <= var.web_max_count
+    error_message = "Must be greater than or equal to 'var.web_desired_count'"
   }
 }
 
-variable "frontend_target_group_port" {
-  description = "Default port for frontend LB target group (traffic and health checks too)"
+variable "web_target_group_port" {
+  description = "Default port for web LB target group (traffic and health checks too)"
   type        = number
   default     = 80
 }
 
-variable "frontend_target_group_health_check_path" {
-  description = "Default path for frontend LB target group health checks too"
+variable "web_target_group_health_check_path" {
+  description = "Default path for web LB target group health checks too"
   type        = string
   default     = "/"
 }
 
-variable "frontend_listener_port" {
-  description = "Default port for frontend LB traffic"
+variable "web_listener_port" {
+  description = "Default port for web LB traffic"
   type        = number
   default     = 80
 }

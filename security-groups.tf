@@ -1,5 +1,5 @@
-resource "aws_security_group" "frontend_lb" {
-  name   = "frontend-lb"
+resource "aws_security_group" "web_lb" {
+  name   = "web-lb"
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -18,12 +18,12 @@ resource "aws_security_group" "frontend_lb" {
 
   tags = {
     Project     = var.project
-    Description = "Allows accessing frontend load balancer from Internet"
+    Description = "Allows accessing web load balancer from Internet"
   }
 }
 
-resource "aws_security_group" "frontend" {
-  name   = "frontend"
+resource "aws_security_group" "web" {
+  name   = "web"
   vpc_id = aws_vpc.main.id
 
   ingress {
@@ -31,7 +31,7 @@ resource "aws_security_group" "frontend" {
     to_port   = 80
     protocol  = "tcp"
     security_groups = [
-      aws_security_group.frontend_lb.id
+      aws_security_group.web_lb.id
     ]
   }
 
@@ -44,7 +44,7 @@ resource "aws_security_group" "frontend" {
 
   tags = {
     Project     = var.project
-    Description = "Allows accessing frontend from frontend load balancer"
+    Description = "Allows accessing web from web load balancer"
   }
 }
 
@@ -57,7 +57,7 @@ resource "aws_security_group" "api_lb" {
     to_port   = 80
     protocol  = "tcp"
     security_groups = [
-      aws_security_group.frontend.id,
+      aws_security_group.web.id,
     ]
   }
 
@@ -70,7 +70,7 @@ resource "aws_security_group" "api_lb" {
 
   tags = {
     Project     = var.project
-    Description = "Allows accessing api load balancer from frontend only"
+    Description = "Allows accessing api load balancer from web only"
   }
 }
 
