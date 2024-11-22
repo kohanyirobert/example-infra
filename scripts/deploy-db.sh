@@ -18,6 +18,7 @@ EOF
 chgrp -R docker $tmpdir
 chmod -R a=rwx $tmpdir
 
+hostname=$(hostname)
 db_password=$(aws ssm get-parameter --output text --query Parameter.Value --name db_password)
 image=postgres:17
 docker pull $image
@@ -25,6 +26,7 @@ docker run \
   --name db \
   --publish 5432:5432 \
   --mount type=bind,source=$tmpdir,target=/docker-entrypoint-initdb.d,readonly \
+  --env EC2_HOSTNAME=$hostname \
   --env POSTGRES_USER=api \
   --env POSTGRES_DB=cars \
   --env POSTGRES_PASSWORD=$db_password \
