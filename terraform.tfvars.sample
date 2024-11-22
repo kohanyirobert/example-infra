@@ -1,0 +1,7 @@
+db_password         = "secret"
+tld                 = "com"
+domain              = "example"
+subdomain           = "other"
+github_oidc_subject = "yourgithubname/yourreponname:**"
+web_image_tag       = "registry/repository/web-name:tag"
+api_image_tag       = "registry/repository/api-name:tag"

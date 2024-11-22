@@ -2,4 +2,6 @@
 .vscode/
 *.tfstate*
 *.*tfvars*
-*.tfbackend
+*.tfbackend*
+*.env*
+!*.sample
