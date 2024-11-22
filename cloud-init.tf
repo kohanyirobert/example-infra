@@ -56,7 +56,7 @@ data "cloudinit_config" "web" {
     content_type = "text/x-shellscript"
     content = templatefile("./scripts/deploy-web.sh.tftpl", {
       api_lb_dns_name = aws_lb.api.dns_name
-      web_image_tag = var.web_image_tag
+      web_image_tag   = var.web_image_tag
     })
   }
 }
