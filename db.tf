@@ -22,7 +22,7 @@ resource "aws_instance" "db" {
   lifecycle {
     ignore_changes = [
       tags["Status"]
-     ]
+    ]
   }
 }
 
