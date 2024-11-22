@@ -1,6 +1,6 @@
 #!/bin/bash
 db_password=$(aws ssm get-parameter --output text --query Parameter.Value --name db_password)
-image=ghcr.io/kohanyirobert/example-api:latest
+image=ghcr.io/kohanyirobert/example-api:0.0.1
 docker pull $image
 docker run \
   --name api \
