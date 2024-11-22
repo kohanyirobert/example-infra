@@ -60,6 +60,9 @@ For running Terraform in GitHub Actions.
 - Run `gh auth login`
 - Run `gh secret set -f github-actions-secrets.env` (this can be done manually as well, but it's easier like this)
 
+**Important**: set the same values in both `terraform.tfvars` (used locally) and in GitHub Actions secrets (via `github-actions-secrets.env` or other means), **otherwise you
+may bump into hard to debug issues** (for example when setting different `db_password` values).
+
 ### Phase 3
 
 - Change infra via editing `.tf` files or tweaking parameters, etc.
