@@ -5,7 +5,7 @@ docker pull $image
 docker run \
   --name web \
   --publish 80:7000 \
-  --env EC2_HOSTNAME=$hostname \
+  --env VITE_EC2_HOSTNAME=$hostname \
   --env VITE_PROXY=http://${api_lb_dns_name} \
   --rm \
   --detach \
