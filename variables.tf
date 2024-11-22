@@ -1,11 +1,16 @@
+variable "tld" {
+  type        = string
+  description = "TLD name, e.g. 'com' (without a . at the end)"
+}
+
 variable "domain" {
   type        = string
-  description = "Domain name, e.g. example.com. (with a . at the end)"
+  description = "Domain name, e.g. 'example' (without a . at the end), to be appended to TLD"
 }
 
 variable "subdomain" {
   type        = string
-  description = "Subdomain name, e.g. other. to be used and appended to 'domain'  (with a . at the end, e.g. other.example.com.)"
+  description = "Subdomain name, e.g. 'other' (without a . at the end), to be appended to domain and TLD"
 }
 
 variable "region" {

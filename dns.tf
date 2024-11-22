@@ -1,5 +1,5 @@
 data "aws_route53_zone" "main" {
-  name = "${subdomain}${domain}"
+  name = "${var.subdomain}.${var.domain}.${var.tld}."
 }
 
 resource "aws_route53_record" "web" {
