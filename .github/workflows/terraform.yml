@@ -31,6 +31,14 @@ jobs:
 
       - name: Run terraform plan/apply
         uses: devsectop/tf-via-pr@v12
+        env:
+          TF_VAR_db_password: ${{ secrets.TF_VAR_db_password }}
+          TF_VAR_tld: ${{ secrets.TF_VAR_tld }}
+          TF_VAR_domain: ${{ secrets.TF_VAR_domain }}
+          TF_VAR_subdomain: ${{ secrets.TF_VAR_subdomain }}
+          TF_VAR_github_oidc_subject: ${{ secrets.TF_VAR_github_oidc_subject }}
+          TF_VAR_web_image_tag: ${{ secrets.TF_VAR_web_image_tag }}
+          TF_VAR_api_image_tag: ${{ secrets.TF_VAR_api_image_tag }}
         with:
           format: true
           validate: true
