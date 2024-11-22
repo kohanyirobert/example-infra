@@ -9,9 +9,9 @@ data "cloudinit_config" "db" {
   }
 
   part {
-    filename     = "01-deploy-postgres.sh"
+    filename     = "01-deploy-db.sh"
     content_type = "text/x-shellscript"
-    content      = file("./scripts/deploy-postgres.sh")
+    content      = file("./scripts/deploy-db.sh")
   }
 
   part {

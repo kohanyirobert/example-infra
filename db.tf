@@ -17,12 +17,6 @@ resource "aws_instance" "db" {
     Project = var.project
   }
 
-  lifecycle {
-    ignore_changes = [
-      tags["Status"],
-    ]
-  }
-
   depends_on = [aws_ssm_parameter.db_password]
 }
 
