@@ -2,3 +2,4 @@
 .vscode/
 *.tfstate*
 *.*tfvars*
+*.tfbackend
