@@ -11,6 +11,10 @@ terraform {
     }
   }
 
+  backend "s3" {
+    encrypt = true
+  }
+
   required_version = "1.9.8"
 }
 
@@ -19,7 +23,7 @@ provider "aws" {
 }
 
 provider "aws" {
-  alias = "eu"
+  alias  = "eu"
   region = "eu-central-1"
 }
 

@@ -1,0 +1,4 @@
+dynamodb_table = "AWS DynamoDB table name used for locking, e.g. terraform-lock"
+region         = "AWS region name where the bucket is, e.g. eu-central-1"
+bucket         = "your bucket name, e.g. subdomain-domain-tld-tf-state"
+key            = "your bucket key, e.g. terraform.tfstate"
