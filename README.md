@@ -76,6 +76,7 @@ Note: when the `api` or `web` images deployed to the infra change related Terraf
 
 ## TODO
 
+- Replace individual tags with [provider tags](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#default_tags-1)
 - ~~It seems that the `db` insteance gets recreated a lot when it doesn't need to because there are some weird dependencies somewhere...~~
   - The problem is the `Status`, it should be removed by a `local-exec` provisioner, but it may not run on GitHub Actions or at all
 - Move variables all into `github-actions-secrets.env` for ease of use

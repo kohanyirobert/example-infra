@@ -1,5 +1,9 @@
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "${var.subdomain}-${var.domain}-${var.tld}-tf-state"
+  bucket        = "${var.subdomain}-${var.domain}-${var.tld}-tf-state"
+  force_destroy = true
+  tags = {
+    Project = var.project
+  }
 }
 
 resource "aws_s3_bucket_versioning" "terraform_bucket_versioning" {
@@ -25,5 +29,9 @@ resource "aws_dynamodb_table" "terraform_lock" {
   attribute {
     name = "LockID"
     type = "S"
+  }
+
+  tags = {
+    Project = var.project
   }
 }
