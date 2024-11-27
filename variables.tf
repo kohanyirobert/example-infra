@@ -26,7 +26,7 @@ variable "api_image_tag" {
 variable "region" {
   description = "AWS region name where resources will be created"
   type        = string
-  default     = "eu-central-1"
+  default     = "us-west-1"
   validation {
     condition     = contains(data.aws_regions.all.names, var.region)
     error_message = "The region must be one of the available AWS regions"
